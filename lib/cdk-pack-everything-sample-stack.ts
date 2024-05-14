@@ -1,7 +1,8 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
-import { aws_s3 as s3 } from 'aws-cdk-lib';
+//import { aws_s3 as s3 } from 'aws-cdk-lib';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
 
 export class CdkPackEverythingSampleStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -13,10 +14,9 @@ export class CdkPackEverythingSampleStack extends cdk.Stack {
     // const queue = new sqs.Queue(this, 'CdkPackEverythingSampleQueue', {
     //   visibilityTimeout: cdk.Duration.seconds(300)
     // });
-    new s3.Bucket(this, 'MyFirstBucket', {
-      versioned: true,
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
-      autoDeleteObjects: true
+    const vpc = new ec2.Vpc(this, 'SampleVpc', {
+      ipAddresses: ec2.IpAddresses.cidr('10.0.0.0/16'),
+      vpcName: 'cdk-sample-vpc'
     });
   }
 }
