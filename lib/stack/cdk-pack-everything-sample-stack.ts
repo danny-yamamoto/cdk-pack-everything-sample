@@ -5,6 +5,8 @@ import { VpcConstruct } from "../construct/vpc";
 
 interface CdkPackEverythingSampleStackProps extends cdk.StackProps {
   envName: string;
+  vpcIdA: string;
+  vpcCidrA: string;
 }
 
 export class CdkPackEverythingSampleStack extends cdk.Stack {
@@ -22,9 +24,9 @@ export class CdkPackEverythingSampleStack extends cdk.Stack {
     //   visibilityTimeout: cdk.Duration.seconds(300)
     // });
 
-    new VpcConstruct(this, "VpcConstruct", {
-      vpcName: "test",
-      cidr: "192.168.224.0/19",
+    new VpcConstruct(this, "VpcConstructA", {
+      vpcName: props?.vpcIdA ?? "default-vpc",
+      cidr: props?.vpcCidrA ?? "192.168.224.0/19",
     });
   }
 }
