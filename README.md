@@ -13,7 +13,7 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `npx cdk diff`    compare deployed stack with current state
 * `npx cdk synth`   emits the synthesized CloudFormation template
 
-
+## Configure programmatic access
 ```bash
 # Run SSO
 aws configure sso
@@ -23,6 +23,25 @@ vi ~/.aws/credentials
 cat ~/.aws/credentials
 ```
 
+## Bootstrap my environment
 ```bash
+echo $MY_ACCOUNT_ID
+echo $MY_REGION
 cdk bootstrap --context environment=Development aws://${MY_ACCOUNT_ID}/${MY_REGION}
+```
+
+## Directory structure
+```bash
+.
+├── bin
+│   ├── cdk-pack-everything-sample.ts
+│   └── parameter.ts
+├── lib
+│   ├── construct
+│   │   └── vpc.ts
+│   └── stack
+│       └── cdk-pack-everything-sample-stack.ts
+├── README.md
+└── test
+    └── cdk-pack-everything-sample.test.ts
 ```
